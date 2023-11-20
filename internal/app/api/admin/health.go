@@ -6,10 +6,11 @@ package admin
 import (
 	"context"
 	desc "disputes/pkg/api/admin"
+	"github.com/gogo/protobuf/types"
 
 	"github.com/pkg/errors"
 )
 
-func (i *Implementation) Health(ctx context.Context, req *desc.HealthRequest) (*desc.HealthResponse, error) {
+func (i *Implementation) Health(ctx context.Context, _ *types.Empty) (*desc.HealthResponse, error) {
 	return nil, errors.New("Health not implemented")
 }

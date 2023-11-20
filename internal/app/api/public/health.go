@@ -6,10 +6,11 @@ package public
 import (
 	"context"
 	desc "disputes/pkg/api/public"
-
-	"github.com/pkg/errors"
+	"github.com/gogo/protobuf/types"
 )
 
-func (i *Implementation) Health(ctx context.Context, req *desc.HealthRequest) (*desc.HealthResponse, error) {
-	return nil, errors.New("Health not implemented")
+func (i *Implementation) Health(ctx context.Context, _ *types.Empty) (*desc.HealthResponse, error) {
+	return &desc.HealthResponse{
+		Status: "success",
+	}, nil
 }

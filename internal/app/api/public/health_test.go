@@ -5,7 +5,7 @@ package public
 
 import (
 	"context"
-	desc "disputes/pkg/api/public"
+	"github.com/gogo/protobuf/types"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -13,7 +13,7 @@ import (
 
 func TestImplementation_Health(t *testing.T) {
 	api := NewPublicAPI()
-	_, err := api.Health(context.Background(), &desc.HealthRequest{})
+	_, err := api.Health(context.Background(), &types.Empty{})
 
 	require.NotNil(t, err)
 	require.Equal(t, "Health not implemented", err.Error())

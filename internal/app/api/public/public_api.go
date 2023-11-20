@@ -4,16 +4,19 @@
 package public
 
 import (
+	config "disputes/internal/config/app"
 	desc "disputes/pkg/api/public"
 
 	"github.com/utrack/clay/v2/transport"
 )
 
-type Implementation struct{}
+type Implementation struct {
+	Host int
+}
 
 // NewPublicAPI create new Implementation
-func NewPublicAPI() *Implementation {
-	return &Implementation{}
+func NewPublicAPI(cfg *config.Config) *Implementation {
+	return &Implementation{Host: cfg.HostPublicAPI}
 }
 
 // GetDescription is a simple alias to the ServiceDesc constructor.

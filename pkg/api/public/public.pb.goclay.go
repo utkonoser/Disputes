@@ -20,6 +20,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-openapi/spec"
+	emptypb "github.com/gogo/protobuf/types"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/utilities"
 	"github.com/pkg/errors"
@@ -167,7 +168,7 @@ func NewPublicAPIHTTPClient(c *http.Client, addr string) *PublicAPI_httpClient {
 	return &PublicAPI_httpClient{c: c, host: addr}
 }
 
-func (c *PublicAPI_httpClient) Health(ctx context.Context, in *HealthRequest, opts ...grpc.CallOption) (*HealthResponse, error) {
+func (c *PublicAPI_httpClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthResponse, error) {
 	mw, err := httpclient.NewMiddlewareGRPC(opts)
 	if err != nil {
 		return nil, err
@@ -218,7 +219,7 @@ func (c *PublicAPI_httpClient) Health(ctx context.Context, in *HealthRequest, op
 var (
 	pattern_goclay_PublicAPI_Health_0 = "/health"
 
-	pattern_goclay_PublicAPI_Health_0_builder = func(in *HealthRequest) string {
+	pattern_goclay_PublicAPI_Health_0_builder = func(in *emptypb.Empty) string {
 		values := url.Values{}
 
 		u := url.URL{
@@ -235,7 +236,7 @@ var (
 var (
 	unmarshaler_goclay_PublicAPI_Health_0 = func(r *http.Request) func(interface{}) error {
 		return func(rif interface{}) error {
-			req := rif.(*HealthRequest)
+			req := rif.(*emptypb.Empty)
 
 			if err := errors.Wrap(runtime.PopulateQueryParameters(req, r.URL.Query(), unmarshaler_goclay_PublicAPI_Health_0_boundParams), "couldn't populate query parameters"); err != nil {
 				return httpruntime.TransformUnmarshalerError(err)
@@ -278,22 +279,11 @@ var _swaggerDef_public_proto = []byte(`{
     }
   },
   "definitions": {
-    "HealthResponseService": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
-        }
-      }
-    },
     "publicHealthResponse": {
       "type": "object",
       "properties": {
-        "postgres": {
-          "$ref": "#/definitions/HealthResponseService"
+        "status": {
+          "type": "string"
         }
       }
     }

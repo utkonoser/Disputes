@@ -4,16 +4,19 @@
 package admin
 
 import (
+	config "disputes/internal/config/app"
 	desc "disputes/pkg/api/admin"
 
 	"github.com/utrack/clay/v2/transport"
 )
 
-type Implementation struct{}
+type Implementation struct {
+	Host int
+}
 
 // NewAdminAPI create new Implementation
-func NewAdminAPI() *Implementation {
-	return &Implementation{}
+func NewAdminAPI(cfg *config.Config) *Implementation {
+	return &Implementation{Host: cfg.HostAdminAPI}
 }
 
 // GetDescription is a simple alias to the ServiceDesc constructor.

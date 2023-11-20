@@ -8,7 +8,8 @@ func New() (cfg Config) {
 }
 
 type Config struct {
-	Name    string
-	Version string
-	Host    string
+	Name          string
+	Version       string
+	HostAdminAPI  int
+	HostPublicAPI int
 }
