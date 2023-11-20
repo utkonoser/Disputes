@@ -1,0 +1,29 @@
+syntax = "proto3";
+package disputes.admin;
+
+option go_package = "admin";
+option (gogoproto.messagename_all) = true;
+
+import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+// Публичное API
+service AdminAPI {
+  // Состояние сервиса
+  rpc Health (HealthRequest) returns (HealthResponse) {
+    option (google.api.http) = {
+      get: "/health"
+    };
+  }
+}
+
+message HealthRequest{}
+
+message HealthResponse {
+  message Service {
+    bool status = 2;
+    string error = 3;
+  }
+  Service postgres = 1;
+}
+

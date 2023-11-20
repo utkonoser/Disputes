@@ -1,0 +1,32 @@
+syntax = "proto3";
+package disputes.public;
+
+option go_package = "public";
+option (gogoproto.messagename_all) = true;
+
+import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+// Публичное API
+service PublicAPI {
+  // Состояние сервиса
+  rpc Health (HealthRequest) returns (HealthResponse) {
+    option (google.api.http) = {
+      get: "/health"
+    };
+  }
+}
+
+message HealthRequest{}
+
+message HealthResponse {
+  message Service {
+    bool status = 2;
+    string error = 3;
+  }
+  Service postgres = 1;
+}
+
+
+
+
