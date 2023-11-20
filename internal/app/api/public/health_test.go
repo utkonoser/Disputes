@@ -5,6 +5,7 @@ package public
 
 import (
 	"context"
+	config "disputes/internal/config/app"
 	"github.com/gogo/protobuf/types"
 	"testing"
 
@@ -12,7 +13,7 @@ import (
 )
 
 func TestImplementation_Health(t *testing.T) {
-	api := NewPublicAPI()
+	api := NewPublicAPI(&config.Config{HostPublicAPI: 8085})
 	_, err := api.Health(context.Background(), &types.Empty{})
 
 	require.NotNil(t, err)
